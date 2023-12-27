@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String          @id @default(uuid())
+  username      String          @map("usuario")
+  password      String          @map("senha")
+  name          String          @map("nome")
+  userChallenge UserChallenge[]
+
+  @@map("usuarios")
+}
+
+model Challange {
+  id            String          @id @default(uuid())
+  title         String          @map("titulo")
+  description   String          @map("descricao")
+  imageUrl      String          @map("imagem_url")
+  userChallenge UserChallenge[]
+  todos         Todo[]
+
+  @@map("desafios")
+}
+
+model UserChallenge {
+  id      String  @id @default(uuid())
+  status  String
+  grade   Float?  @map("nota")
+  repoUrl String? @map("repo_url")
+
+  user   User?  @relation(fields: [userId], references: [id])
+  userId String @map("usuario_id")
+
+  Challanges   Challange? @relation(fields: [challangesId], references: [id])
+  challangesId String     @map("desafio_id")
+
+  @@map("usuario_desafio")
+}
+
+model Todo {
+  id    String @id @default(uuid())
+  title String @map("titulo")
+
+  challange    Challange? @relation(fields: [challangesId], references: [id])
+  challangesId String     @map("desafio_id")
+
+  @@map("todo")
+}
