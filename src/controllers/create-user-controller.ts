@@ -24,6 +24,12 @@ export class CreateUserService {
     if (password !== confirmPassword) {
       throw new AppError('confirmPassword must be equal to password', 400)
     }
+    const userAlreadyExists = await prisma.user.findFirst({
+      where: { username }
+    })
+    if (userAlreadyExists !== null) {
+      throw new AppError('username already exists', 400)
+    }
     const user = await prisma.user.create({
       data: {
         name,

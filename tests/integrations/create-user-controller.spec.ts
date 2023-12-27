@@ -1,4 +1,5 @@
 import { app } from '@/app'
+import { prisma } from '@/database/prisma'
 import supertest from 'supertest'
 
 describe('/api/v1/create/user', () => {
@@ -8,6 +9,10 @@ describe('/api/v1/create/user', () => {
     password: 'superSecret',
     confirmPassword: 'superSecret'
   }
+
+  afterAll(async () => {
+    await prisma.user.deleteMany()
+  })
 
   it('should return 201 when user is created', async () => {
     const response = await supertest(app)
@@ -33,9 +38,30 @@ describe('/api/v1/create/user', () => {
       .post('/api/v1/create/user')
       .send(invalidUser)
 
-    console.log(response.body)
-
     expect(response.statusCode).toBe(400)
     expect(response.body.message).toBe('confirmPassword must be equal to password')
+  })
+
+  it('should return 400 when try to create user with existing username', async () => {
+    await prisma.user.create({
+      data: {
+        name: 'Lida Stone',
+        password: 'secret123',
+        username: 'lidastone'
+      }
+    })
+    const invalidUser = {
+      name: 'Landon Fletcher',
+      password: 'secret547',
+      confirmPassword: 'secret547',
+      username: 'lidastone'
+    }
+
+    const response = await supertest(app)
+      .post('/api/v1/create/user')
+      .send(invalidUser)
+
+    expect(response.statusCode).toBe(400)
+    expect(response.body.message).toBe('username already exists')
   })
 })
