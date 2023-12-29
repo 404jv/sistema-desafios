@@ -22,6 +22,7 @@ describe('/api/v1/users/login', () => {
 
   afterAll(async () => {
     await prisma.user.deleteMany()
+    await prisma.$disconnect()
   })
 
   it('should be able to authenticate user', async () => {

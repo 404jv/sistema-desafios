@@ -2,7 +2,7 @@ import { app } from '@/app'
 import { prisma } from '@/database/prisma'
 import supertest from 'supertest'
 
-describe('/api/v1/create/user', () => {
+describe('/api/v1/users/create', () => {
   const user = {
     name: 'Iva Brown',
     username: 'ivabrown',
@@ -17,7 +17,7 @@ describe('/api/v1/create/user', () => {
 
   it('should return 201 when user is created', async () => {
     const response = await supertest(app)
-      .post('/api/v1/create/user')
+      .post('/api/v1/users/create')
       .send(user)
 
     expect(response.statusCode).toBe(201)
@@ -36,7 +36,7 @@ describe('/api/v1/create/user', () => {
     }
 
     const response = await supertest(app)
-      .post('/api/v1/create/user')
+      .post('/api/v1/users/create')
       .send(invalidUser)
 
     expect(response.statusCode).toBe(400)
@@ -59,7 +59,7 @@ describe('/api/v1/create/user', () => {
     }
 
     const response = await supertest(app)
-      .post('/api/v1/create/user')
+      .post('/api/v1/users/create')
       .send(invalidUser)
 
     expect(response.statusCode).toBe(400)

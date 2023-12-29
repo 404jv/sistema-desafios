@@ -7,7 +7,7 @@ const routes = Router()
 const createUserController = new CreateUserController()
 const authenticateController = new AuthenticateController()
 
-routes.post('/create/user', createUserController.handle)
+routes.post('/users/create', createUserController.handle)
 routes.post('/users/login', authenticateController.handle)
 
 export { routes }
