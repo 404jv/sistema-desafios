@@ -12,6 +12,7 @@ model User {
   username      String          @map("usuario")
   password      String          @map("senha")
   name          String          @map("nome")
+  isAdmin       Boolean         @default(false) @map("adm")
   userChallenge UserChallenge[]
 
   @@map("usuarios")

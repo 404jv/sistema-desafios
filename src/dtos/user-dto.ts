@@ -2,6 +2,7 @@ export type UserDTO = {
   id: string
   username: string
   name: string
+  isAdmin: boolean
 }
 
 export type CreateUserDTO = {

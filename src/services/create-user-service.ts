@@ -2,6 +2,7 @@ import { prisma } from '@/database/prisma'
 import { type CreateUserDTO, type UserDTO } from '@/dtos/user-dto'
 import { AppError } from '@/errors/AppError'
 import { UserMapper } from '@/mappers/user-mapper'
+import bcrypt from 'bcrypt'
 
 export class CreateUserService {
   async execute ({ confirmPassword, name, password, username }: CreateUserDTO): Promise<UserDTO> {
@@ -14,10 +15,11 @@ export class CreateUserService {
     if (userAlreadyExists !== null) {
       throw new AppError('username already exists', 400)
     }
+    const passwordHash = await bcrypt.hash(password, 10)
     const user = await prisma.user.create({
       data: {
         name,
-        password,
+        password: passwordHash,
         username
       }
     })
