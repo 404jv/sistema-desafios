@@ -12,6 +12,7 @@ describe('/api/v1/create/user', () => {
 
   afterAll(async () => {
     await prisma.user.deleteMany()
+    await prisma.$disconnect()
   })
 
   it('should return 201 when user is created', async () => {

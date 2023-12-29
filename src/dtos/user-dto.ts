@@ -10,3 +10,8 @@ export type CreateUserDTO = {
   password: string
   confirmPassword: string
 }
+
+export type AuthenticationUserDTO = {
+  username: string
+  password: string
+}
