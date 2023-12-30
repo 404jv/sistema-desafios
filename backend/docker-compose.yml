@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres
+    container_name: database_sistema
+    ports:
+      - 5432:5432
+    env_file:
+      - .env.development
+    volumes:
+      - pgdata:/data/postgres
+
+volumes:
+  pgdata:
+    driver: local
