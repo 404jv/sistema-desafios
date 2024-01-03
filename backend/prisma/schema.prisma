@@ -36,10 +36,10 @@ model UserChallenge {
   grade   Float?  @map("nota")
   repoUrl String? @map("repo_url")
 
-  user   User?  @relation(fields: [userId], references: [id])
+  user   User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @map("usuario_id")
 
-  challange   Challenge? @relation(fields: [challengeId], references: [id])
+  challange   Challenge? @relation(fields: [challengeId], references: [id], onDelete: Cascade)
   challengeId String     @map("desafio_id")
 
   @@map("usuario_desafio")
@@ -49,7 +49,7 @@ model Todo {
   id    String @id @default(uuid())
   title String @map("titulo")
 
-  challenge   Challenge? @relation(fields: [challengeId], references: [id])
+  challenge   Challenge? @relation(fields: [challengeId], references: [id], onDelete: Cascade)
   challengeId String     @map("desafio_id")
 
   @@map("todo")
@@ -59,7 +59,7 @@ model Tags {
   id    String @id @default(uuid())
   title String @map("titulo")
 
-  challenge   Challenge? @relation(fields: [challangeId], references: [id])
+  challenge   Challenge? @relation(fields: [challangeId], references: [id], onDelete: Cascade)
   challangeId String     @map("desafio_id")
 
   @@map("tags")
