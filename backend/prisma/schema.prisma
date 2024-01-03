@@ -18,13 +18,14 @@ model User {
   @@map("usuarios")
 }
 
-model Challange {
+model Challenge {
   id            String          @id @default(uuid())
   title         String          @map("titulo")
   description   String          @map("descricao")
   imageUrl      String          @map("imagem_url")
   userChallenge UserChallenge[]
   todos         Todo[]
+  tags          Tags[]
 
   @@map("desafios")
 }
@@ -38,8 +39,8 @@ model UserChallenge {
   user   User?  @relation(fields: [userId], references: [id])
   userId String @map("usuario_id")
 
-  Challanges   Challange? @relation(fields: [challangesId], references: [id])
-  challangesId String     @map("desafio_id")
+  challange   Challenge? @relation(fields: [challengeId], references: [id])
+  challengeId String     @map("desafio_id")
 
   @@map("usuario_desafio")
 }
@@ -48,8 +49,18 @@ model Todo {
   id    String @id @default(uuid())
   title String @map("titulo")
 
-  challange    Challange? @relation(fields: [challangesId], references: [id])
-  challangesId String     @map("desafio_id")
+  challenge   Challenge? @relation(fields: [challengeId], references: [id])
+  challengeId String     @map("desafio_id")
 
   @@map("todo")
+}
+
+model Tags {
+  id    String @id @default(uuid())
+  title String @map("titulo")
+
+  challenge   Challenge? @relation(fields: [challangeId], references: [id])
+  challangeId String     @map("desafio_id")
+
+  @@map("tags")
 }

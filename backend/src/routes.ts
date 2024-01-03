@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { CreateUserController } from './controllers/create-user-controller'
 import { AuthenticateController } from './controllers/authentication-controller'
-import { CreateChallengesController } from './controllers/create-challange-controller'
+import { CreateChallengeController } from './controllers/create-challenge-controller'
 
 const routes = Router()
 
