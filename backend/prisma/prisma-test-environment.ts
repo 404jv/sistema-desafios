@@ -6,7 +6,7 @@ import NodeEnvironment from 'jest-environment-node'
 import type { JestEnvironmentConfig, EnvironmentContext } from '@jest/environment'
 import { PrismaClient } from '@prisma/client'
 
-dotenv.config({ path: '.env.testing' })
+dotenv.config({ path: '.env.development' })
 
 const prisma = new PrismaClient()
 
