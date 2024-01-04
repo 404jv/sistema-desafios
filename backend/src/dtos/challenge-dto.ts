@@ -16,3 +16,23 @@ export type ChallengeDTO = {
   tags: TagDTO[]
   todos: TodoDTO[]
 }
+
+export enum ChallengeStatus {
+  PENDING = 'PENDING',
+  REVISED = 'REVISED',
+  SUBMITTED = 'SUBMITTED'
+}
+
+export type SubmitChallengeDTO = {
+  repoUrl: string | null
+  challengeId: string
+  userId: string
+}
+export type UserChallengeDTO = {
+  id: string
+  challengeId: string
+  userId: string
+  status: string
+  repoUrl: string | null
+  grade: number | null
+}
