@@ -74,3 +74,42 @@ export async function createManyChallenges (): Promise<ChallengeDTO[]> {
   })
   return [challenge1, challenge2]
 }
+
+export async function createChallenge (): Promise<ChallengeDTO> {
+  const challenge = await prisma.challenge.create({
+    data: {
+      description: 'Test',
+      title: 'Challenge Test 1',
+      imageUrl: 'image_test.png',
+      tags: {
+        createMany: {
+          data: [
+            {
+              title: 'tech1'
+            },
+            {
+              title: 'tech2'
+            }
+          ]
+        }
+      },
+      todos: {
+        createMany: {
+          data: [
+            {
+              title: 'do something'
+            },
+            {
+              title: 'do something else'
+            }
+          ]
+        }
+      }
+    },
+    include: {
+      tags: true,
+      todos: true
+    }
+  })
+  return challenge
+}
