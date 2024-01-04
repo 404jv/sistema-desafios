@@ -1,7 +1,7 @@
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
-
 export default function Home() {
-  return <h1>Oi</h1>
+  return (
+    <header className="bg-blue w-full flex items-center justify-center h-20">
+      <h1 className="text-white font-bold text-3xl font-inter">Luna Bus</h1>
+    </header>
+  )
 }
