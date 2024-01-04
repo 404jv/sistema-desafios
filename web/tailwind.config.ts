@@ -1,7 +1,12 @@
 import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
 
 const config: Config = {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
     extend: {
       screens: {
@@ -12,10 +17,11 @@ const config: Config = {
         xl: '1440px',
       },
       colors: {
-        blue: '#3E78CF',
-        green: '#4C9453',
-        red: '#944C4C',
-        yellow: '#F8CC5B',
+        'black-900': '#0D0D0D',
+        'black-800': '#141A26',
+        'black-700': '#2E3D59',
+        'purple-900': '#5833A6',
+        'purple-100': '#8679D9',
         'gray-900': '#121214',
         'gray-800': '#181819',
         'gray-700': '#202024',
@@ -23,10 +29,12 @@ const config: Config = {
         'gray-500': '#7C7C8A',
         'gray-100': '#E1E1E6',
         white: '#FFFFFF',
+        green: '#1DBA54',
+        blue: '#0085FF'
       },
       fontFamily: {
-        inter: ["'Inter'", 'sans-serif'],
-        roboto: ["'Roboto'", 'sans-serif'],
+        inter: ['var(--font-inter)', ...fontFamily.sans],
+        roboto: ['var(--font-roboto)', ...fontFamily.sans],
       },
     },
   },
