@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.rainbow-hover:hover {
+  background-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+  background-size: 200% 100%;
+  animation: rainbowHover 1.5s linear infinite;
+}
+
+@keyframes rainbowHover {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
