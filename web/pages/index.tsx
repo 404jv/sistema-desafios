@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Circle, CircleWavyQuestion } from '@phosphor-icons/react'
+import Card from "@/components/Card";
+
 export default function Home() {
   return (
     <div>
@@ -45,25 +48,11 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex pl-8">
-          <div className="bg-black-800 rounded-md min-w-64">
-            <Image
-              src={'https://picsum.photos/200'}
-              className='rounded-t-md object-cover min-w-64 max-h-40'
-              alt="Projeto foto"
-              width={'190'}
-              height={190}
-            />
-            <h3 className="text-white font-bold text-center mt-1 mb-2">Github Profile</h3>
-            <div className="flex flex-col ml-2">
-              <span className="font-bold text-green">Python</span>
-              <span className="font-bold text-red-600">Minecraft</span>
-              <span className="font-bold text-blue">Fácil</span>
-            </div>
-            <div className='h-size flex justify-center mb-2'>
-              <Link className="text-white bg-black-700 pt-1 text-center rounded" href="/">Ver mais</Link>
-            </div>
-          </div>
+        <div className="flex pl-8 gap-4 flex-wrap">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </div>
       </main>
     </div>
