@@ -28,7 +28,7 @@ export default function Card() {
         </div>
       </div>
       <div className='h-size flex justify-center mb-2 min-w-4'>
-        <Link className="text-white bg-black-700 mt-2 mb-1 pl-5 pr-5 pt-1 pb-1 rounded text-center hover:opacity-40" href="/">Ver mais</Link>
+        <Link className="text-white bg-black-700 mt-2 mb-1 pl-5 pr-5 pt-1 pb-1 rounded text-center hover:opacity-40" href="/detalhe">Ver mais</Link>
       </div>
     </div>
   )

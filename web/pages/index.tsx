@@ -1,23 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
-
-import { Circle, CircleWavyQuestion } from '@phosphor-icons/react'
 import Card from "@/components/Card";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
     <div>
-      <header className="bg-black-800 w-full flex items-center justify-between h-20 p-8">
-        <Image
-          width={40}
-          height={40}
-          src={'/emoji.png'}
-          alt="emoji"
-        />
-        <h1 className="text-purple-900 font-bold text-xl">
-          <Link href="/">Sistema Desafios</Link>
-        </h1>
-      </header>
+      <Header />
 
       <main>
         <div className='flex flex-row items-center h-size justify-between pl-8 pr-8 mt-16 mb-4'>
