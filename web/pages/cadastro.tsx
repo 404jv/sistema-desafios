@@ -1,19 +1,35 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Cadastro() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
-    user: "",
+    username: "",
     password: "",
     confirmPassword: "",
   });
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const { confirmPassword, name, password, user } = formData;
-    console.log(confirmPassword, name, password, user)
-   // const response = await fetch('/hello', { method: 'get' })
+    try {
+      const response = await fetch('http://localhost:3333/api/v1/users/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        alert(errorResponse.message);
+        return;
+      }
+      router.push('/login');
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,8 +64,8 @@ export default function Cadastro() {
               required 
               className="bg-black-700 rounded w-72 h-9 p-2"
               type="text" 
-              name="user"
-              value={formData.user}
+              name="username"
+              value={formData.username}
               onChange={handleChange}
             />
           </div>

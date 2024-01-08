@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "ts-dev:watch": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only src/server.ts",
-    "dev": "npm run services:up && npm run ts-dev:watch",
+    "dev": "npm run services:up && npm run migrate:dev  && npm run ts-dev:watch",
     "services:up": "docker compose up -d",
     "services:down": "docker compose down",
     "services:stop": "docker compose stop",
+    "migrate:dev": "npx prisma migrate dev",
     "test": "npm run services:up && jest --verbose",
     "test:watch": "npm test -- --watch --detectOpenHandles",
     "test:only": "npm run test:watch -- --testPathPattern='submit-challenge-controller.spec.ts'",
