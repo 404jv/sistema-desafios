@@ -46,7 +46,7 @@ export default function Cadastro() {
         <h1 className="text-purple-900 font-bold text-2xl">
           CADASTRO
         </h1>
-        <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center content-center'>
+        <form method="POST" onSubmit={handleSubmit} className='flex flex-col justify-center items-center content-center'>
           <div className="flex flex-col text-start text-white mt-4">
             <label className="mb-1 font-bold">Nome Completo</label>
             <input
