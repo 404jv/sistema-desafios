@@ -1,7 +1,24 @@
 import Card from "@/components/Card";
 import Header from "@/components/Header";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import loadChallenges from "./api/load-challenges";
 
-export default function Home() {
+type Props = {
+  challenges: any
+}
+
+export default function Home({ challenges }: Props) {
+  const router = useRouter()
+
+  useEffect(() => {
+    console.log(challenges)
+    const token = localStorage.getItem('token@sistemadesafios');
+    if (!token) {
+      router.push('/login');
+    }    
+  }, [router])
+
   return (
     <div>
       <Header />
@@ -44,4 +61,13 @@ export default function Home() {
       </main>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const challenges = await loadChallenges();
+  return {
+    props: {
+      challenges
+    }
+  }
 }
