@@ -1,18 +1,17 @@
-import Card from "@/components/Card";
+import Card, { Challenge } from "@/components/Card";
 import Header from "@/components/Header";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import loadChallenges from "./api/load-challenges";
 
 type Props = {
-  challenges: any
+  challenges: Challenge[]
 }
 
 export default function Home({ challenges }: Props) {
   const router = useRouter()
 
   useEffect(() => {
-    console.log(challenges)
     const token = localStorage.getItem('token@sistemadesafios');
     if (!token) {
       router.push('/login');
@@ -53,10 +52,12 @@ export default function Home({ challenges }: Props) {
           </div>
         </div>
         <div className="flex pl-8 gap-4 flex-wrap">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {challenges.map(challenge => (
+            <Card 
+              key={challenge.id} 
+              challenge={challenge}
+            />
+          ))}
         </div>
       </main>
     </div>

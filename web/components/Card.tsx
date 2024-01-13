@@ -1,34 +1,59 @@
 import { Circle } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
+import Tag from "./Tag";
 
-export default function Card() {
+
+type Tags = {
+  id: string;
+  title: string;
+  challengeId: string;
+}
+
+type Todos = {
+  id: string;
+  title: string;
+  challengeId: string;
+}
+
+export type Challenge = {
+  id: string
+  description: string
+  imageUrl: string
+  title: string
+  tags: Tags[]
+  todos: Todos[]
+}
+
+type Props = {
+  challenge: Challenge
+}
+
+export default function Card({ challenge }: Props) {
   return (
     <div className="bg-black-800 rounded-md min-w-64">
       <Image
-        src={'https://picsum.photos/200'}
+        src={challenge.imageUrl}
         className='rounded-t-md object-cover min-w-64 max-h-40'
-        alt="Projeto foto"
+        alt="Foto do projeto"
         width={'190'}
         height={190}
       />
-      <h3 className="text-white font-bold text-center mt-2 text-xl">Github Profile</h3>
+      <h3 className="text-white font-bold text-center mt-2 text-xl">
+        {challenge.title}
+      </h3>
       <div className="flex flex-col ml-2">
-        <div className="font-bold text-green flex gap-2 ">
-          <Circle className="bg-green rounded-full mt-1" width={14} height={14} color='rgb(29 186 84)' />
-          <span>Python</span>
-        </div>
-        <div className="font-bold text-red-500 flex gap-2 ">
-          <Circle className="bg-red-500 rounded-full mt-1" width={14} height={14} color='rgb(239 68 68)' />
-          <span>Minecraft</span>
-        </div>
-        <div className="font-bold text-blue flex gap-2 ">
-          <Circle className="bg-blue rounded-full mt-1" width={14} height={14} color='rgb(0 133 255)' />
-          <span>Fácil</span>
-        </div>
+        {challenge.tags.map(tag => (
+          <Tag title={tag.title} key={tag.id} />
+        ))}
       </div>
       <div className='h-size flex justify-center mb-2 min-w-4'>
-        <Link className="text-white bg-black-700 mt-2 mb-1 pl-5 pr-5 pt-1 pb-1 rounded text-center hover:opacity-40" href="/detalhe">Ver mais</Link>
+        <Link 
+          className="text-white bg-black-700 mt-2 mb-1 pl-5 pr-5 pt-1 pb-1 rounded text-center hover:opacity-40"
+          href={`/detalhe/${challenge.id}`}
+        >
+          Ver mais
+        </Link>
       </div>
     </div>
   )
