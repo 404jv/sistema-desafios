@@ -16,7 +16,10 @@ export default function Detalhe() {
       try {
         const response = await fetch(`http://localhost:3333/api/v1/challenges/${challengeId}`);
         if (!response.ok) {
-          throw new Error('Erro ao buscar desafio');
+          const errorResponse = await response.json();
+          alert(errorResponse.message);
+          router.push('/')
+          return;
         }
         const fetchedChallenge = await response.json();
         setChallenge(fetchedChallenge);
@@ -27,7 +30,7 @@ export default function Detalhe() {
     if (challengeId) {
       fetchChallenge();
     }
-  }, [challengeId]);
+  }, [challengeId, router]);
 
   if (!challenge) {
     return <p>Carregando...</p>;
