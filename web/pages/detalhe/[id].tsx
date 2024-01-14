@@ -5,12 +5,53 @@ import Header from "@/components/Header";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Challenge } from "@/components/Card";
+import Confetti from "react-confetti";
 
 export default function Detalhe() {
   const [challenge, setChallenge] = useState<Challenge>()
   const router = useRouter()
   const challengeId = router.query.id as string
-  
+  const [repoUrl, setRepoUrl] = useState<string>('')
+  const [showConfetti, setShowConfetti] = useState(false); 
+  const [sended, setSended] = useState(false);
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const userToken = localStorage.getItem('token@sistemadesafios')
+    console.log(userToken)
+    try {
+      const response = await fetch('http://localhost:3333/api/v1/challenges/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${userToken}`
+        },
+        body: JSON.stringify({
+          repoUrl,
+          challengeId,
+        }),
+      });
+      if (response.status === 401) {
+        localStorage.removeItem('token@sistemadesafios')
+        localStorage.removeItem('user@sistemadesafios')
+        router.push('/login')
+        return;
+      }
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        alert(errorResponse.message);
+      }
+      const body = await response.json()
+      setShowConfetti(true);
+      setSended(true);
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 10000);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     const fetchChallenge = async () => {
       try {
@@ -58,6 +99,7 @@ export default function Detalhe() {
             height={360}
           />
         </div>
+        {showConfetti && <Confetti />}
         <div className='w-full flex justify-between items-center'>
           <div>
             <h2 className='text-purple-900 font-bold text-3xl text-center mb-4'>
@@ -76,17 +118,26 @@ export default function Detalhe() {
             <h2 className='text-purple-900 font-bold text-3xl text-center mb-4'>
               🏆Entregar
             </h2>
-            <div className='flex flex-col justify-center align-center gap-2'>
+            <form method="POST" onSubmit={handleSubmit} className='flex flex-col justify-center align-center gap-2'>
               <p className="text-gray-300 text-base text-justify max-w-sm">
-              Envia sua solução no GitHub e coloque o link do repositório abaixo. Após isso, espere a correção e veja sua nota.
+                Envia sua solução no GitHub e coloque o link do repositório abaixo. Após isso, espere a correção e veja sua nota.
               </p>
-              <input placeholder="Ex: https://github.com/404jv/desafio-01" className="bg-black-700 rounded h-9 p-2 text-white" type="text" />
+              <input 
+                placeholder="Ex: https://github.com/404jv/desafio-01"
+                className={`bg-black-700 rounded h-9 p-2 text-white ${sended && 'hidden'}`}
+                type="text"
+                name="repoUrl"
+                value={repoUrl}
+                onChange={(e) => setRepoUrl(e.target.value)}
+              />
               <button 
-                className="bg-blue self-center text-white p-1 rounded-lg mt-2 w-36 text-lg hover:bg-blue-700 font-bold py-2 px-4 rainbow-hover"
-                type="submit">
-                Enviar
+                className="bg-blue self-center text-white p-1 rounded-lg mt-2 w-36 text-lg hover:bg-blue-700 font-bold py-2 px-4 rainbow-hover disabled:bg-green disabled:hover:bg-none"
+                type="submit"
+                disabled={sended}
+              >
+                {sended ? 'Enviado' : 'Enviar'}
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </main>
