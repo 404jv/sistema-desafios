@@ -32,8 +32,8 @@ export default function Detalhe() {
         }),
       });
       if (response.status === 401) {
-        localStorage.removeItem('token@sistemadesafios')
         localStorage.removeItem('user@sistemadesafios')
+        localStorage.removeItem('token@sistemadesafios')
         router.push('/login')
         return;
       }
