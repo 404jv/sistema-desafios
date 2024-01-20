@@ -22,7 +22,7 @@ routes.post('/users/login', authenticateController.handle)
 
 routes.post('/challenges/create', ensureAuthenticated, ensureIsAdmin, createChallengeController.handle)
 routes.get('/challenges/list', listChallengesController.handle)
-routes.get('/challenges/:id', getChallengesController.handle)
+routes.get('/challenges/:id', ensureAuthenticated, getChallengesController.handle)
 routes.post('/challenges/submit', ensureAuthenticated, submitChallengeController.handle)
 
 export { routes }

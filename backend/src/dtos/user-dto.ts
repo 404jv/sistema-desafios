@@ -16,3 +16,8 @@ export type AuthenticationUserDTO = {
   username: string
   password: string
 }
+
+export type AuthenticateResponseDTO = {
+  token: string
+  user: UserDTO
+}

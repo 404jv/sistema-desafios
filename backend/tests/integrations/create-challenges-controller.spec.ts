@@ -6,7 +6,7 @@ import supertest from 'supertest'
 
 describe('/api/v1/challenges/create', () => {
   let userAdminToken: string
-  let userToken: string
+  let token: string
   const challenge: CreateChallengeDTO = {
     description: 'test',
     imageUrl: 'url',
@@ -17,7 +17,8 @@ describe('/api/v1/challenges/create', () => {
 
   beforeAll(async () => {
     userAdminToken = await CreateAdminUserAndAuthenticate()
-    userToken = await CreateUserAndAuthenticate()
+    const userToken = await CreateUserAndAuthenticate()
+    token = userToken.token
   })
 
   it('should return 201 when create challenge with correct params', async () => {
@@ -33,7 +34,7 @@ describe('/api/v1/challenges/create', () => {
   it('should return 401 when a non admin try to create a challenge', async () => {
     const response = await supertest(app)
       .post('/api/v1/challenges/create')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${token}`)
       .send(challenge)
 
     expect(response.status).toBe(401)

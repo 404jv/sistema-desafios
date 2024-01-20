@@ -1,5 +1,6 @@
 import { authConfig } from '@/config/auth'
 import { prisma } from '@/database/prisma'
+import { type AuthenticateResponseDTO } from '@/dtos/user-dto'
 import { UserMapper } from '@/mappers/user-mapper'
 
 import { hashSync } from 'bcrypt'
@@ -22,7 +23,7 @@ export async function CreateAdminUserAndAuthenticate (): Promise<string> {
   return token
 }
 
-export async function CreateUserAndAuthenticate (): Promise<string> {
+export async function CreateUserAndAuthenticate (): Promise<AuthenticateResponseDTO> {
   const user = await prisma.user.create({
     data: {
       name: 'user_test',
@@ -36,5 +37,8 @@ export async function CreateUserAndAuthenticate (): Promise<string> {
     subject: user.id,
     expiresIn: authConfig.expiresInToken
   })
-  return token
+  return {
+    token,
+    user: userDto
+  }
 }
