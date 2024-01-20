@@ -2,7 +2,7 @@ import { prisma } from '@/database/prisma'
 import { type UserChallengeDTO, type ChallengeDTO } from '@/dtos/challenge-dto'
 import { AppError } from '@/errors/AppError'
 import { ChallengeMapper } from '@/mappers/challenge-mapper'
-import { SubmitChallengeMapper } from '@/mappers/user-challenge-mapper'
+import { UserChallengeMapper } from '@/mappers/user-challenge-mapper'
 
 type GetChallengeResponse = {
   challenge: ChallengeDTO
@@ -29,7 +29,7 @@ export class GetChallengeService {
     })
     let userStatusDTO = null
     if (userChallenge !== null) {
-      userStatusDTO = SubmitChallengeMapper.toDTO(userChallenge)
+      userStatusDTO = UserChallengeMapper.toDTO(userChallenge)
     }
     const challengeDTO = ChallengeMapper.toDTO(challenge)
     return {
