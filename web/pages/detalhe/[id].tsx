@@ -7,8 +7,17 @@ import { useEffect, useState } from "react";
 import { Challenge } from "@/components/Card";
 import Confetti from "react-confetti";
 
+type UserStatus = {
+  repoUrl: string;
+  challengeId: string;
+  userId: string;
+  id: string;
+  status: string;
+  grade: number | null
+}
 export default function Detalhe() {
   const [challenge, setChallenge] = useState<Challenge>()
+  const [userStatus, setUserStatus] = useState<UserStatus | null>()
   const router = useRouter()
   const challengeId = router.query.id as string
   const [repoUrl, setRepoUrl] = useState<string>('')
@@ -18,7 +27,6 @@ export default function Detalhe() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const userToken = localStorage.getItem('token@sistemadesafios')
-    console.log(userToken)
     try {
       const response = await fetch('http://localhost:3333/api/v1/challenges/submit', {
         method: 'POST',
@@ -41,7 +49,6 @@ export default function Detalhe() {
         const errorResponse = await response.json();
         alert(errorResponse.message);
       }
-      const body = await response.json()
       setShowConfetti(true);
       setSended(true);
       setTimeout(() => {
@@ -53,9 +60,14 @@ export default function Detalhe() {
   }
 
   useEffect(() => {
+    const accessToken = localStorage.getItem('token@sistemadesafios');
     const fetchChallenge = async () => {
       try {
-        const response = await fetch(`http://localhost:3333/api/v1/challenges/${challengeId}`);
+        const response = await fetch(`http://localhost:3333/api/v1/challenges/${challengeId}`, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        });
         if (!response.ok) {
           const errorResponse = await response.json();
           alert(errorResponse.message);
@@ -63,7 +75,8 @@ export default function Detalhe() {
           return;
         }
         const fetchedChallenge = await response.json();
-        setChallenge(fetchedChallenge);
+        setChallenge(fetchedChallenge.challenge);
+        setUserStatus(fetchedChallenge.userStatus)
       } catch (error) {
         console.error('Erro ao buscar desafio:', error);
       }
@@ -71,7 +84,10 @@ export default function Detalhe() {
     if (challengeId) {
       fetchChallenge();
     }
-  }, [challengeId, router]);
+    if (!!userStatus) {
+      setSended(true)
+    }
+  }, [challengeId, router, userStatus]);
 
   if (!challenge) {
     return <p>Carregando...</p>;
