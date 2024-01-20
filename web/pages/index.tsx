@@ -1,7 +1,7 @@
 import Card, { Challenge } from "@/components/Card";
 import Header from "@/components/Header";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import loadChallenges from "./api/load-challenges";
 
 type Props = {
@@ -9,9 +9,12 @@ type Props = {
 }
 
 export default function Home({ challenges }: Props) {
+  const [user, setUser] = useState<any>(null)
   const router = useRouter()
 
   useEffect(() => {
+    const userJson = localStorage.getItem('user@sistemadesafios') as string
+    setUser(JSON.parse(userJson))
     const token = localStorage.getItem('token@sistemadesafios');
     if (!token) {
       router.push('/login');
@@ -23,7 +26,8 @@ export default function Home({ challenges }: Props) {
       <Header />
 
       <main>
-        <div className='flex flex-row items-center h-size justify-between pl-8 pr-8 mt-16 mb-4'>
+        <h1 className="font-bold text-2xl text-white mt-16 mb-8 ml-8">👋 Olá, {user?.name}</h1>
+        <div className='flex flex-row items-center h-size justify-between pl-8 pr-8 mb-4'>
           <h2 className='text-purple-900 font-bold text-3xl'>Desafios</h2>
           <div className='flex gap-16'>
             <div className="flex  justify-center align-center flex-col">
