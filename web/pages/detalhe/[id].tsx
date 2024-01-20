@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Challenge } from "@/components/Card";
 import Confetti from "react-confetti";
+import ConfettiWrapper from "@/components/ConfettiWrapper";
 
 type UserStatus = {
   repoUrl: string;
@@ -51,9 +52,6 @@ export default function Detalhe() {
       }
       setShowConfetti(true);
       setSended(true);
-      setTimeout(() => {
-        setShowConfetti(false);
-      }, 10000);
     } catch (error) {
       console.error(error);
     }
@@ -86,6 +84,7 @@ export default function Detalhe() {
     }
     if (!!userStatus) {
       setSended(true)
+      setShowConfetti(true)
     }
   }, [challengeId, router, userStatus]);
 
@@ -115,7 +114,7 @@ export default function Detalhe() {
             height={360}
           />
         </div>
-        {showConfetti && <Confetti />}
+        {showConfetti && <ConfettiWrapper numberOfPieces={100} />}
         <div className='w-full flex justify-between items-center'>
           <div>
             <h2 className='text-purple-900 font-bold text-3xl text-center mb-4'>
