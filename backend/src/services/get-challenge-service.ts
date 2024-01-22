@@ -1,12 +1,18 @@
 import { prisma } from '@/database/prisma'
-import { type ChallengeDTO } from '@/dtos/challenge-dto'
+import { type UserChallengeDTO, type ChallengeDTO } from '@/dtos/challenge-dto'
 import { AppError } from '@/errors/AppError'
 import { ChallengeMapper } from '@/mappers/challenge-mapper'
+import { UserChallengeMapper } from '@/mappers/user-challenge-mapper'
+
+type GetChallengeResponse = {
+  challenge: ChallengeDTO
+  userStatus: UserChallengeDTO | null
+}
 
 export class GetChallengeService {
-  async execute (id: string): Promise<ChallengeDTO> {
+  async execute (challengeId: string, userId: string): Promise<GetChallengeResponse> {
     const challenge = await prisma.challenge.findFirst({
-      where: { id },
+      where: { id: challengeId },
       include: {
         tags: true,
         todos: true
@@ -15,7 +21,20 @@ export class GetChallengeService {
     if (challenge === null) {
       throw new AppError('Challenge not found', 404)
     }
+    const userChallenge = await prisma.userChallenge.findFirst({
+      where: {
+        userId,
+        challengeId
+      }
+    })
+    let userStatusDTO = null
+    if (userChallenge !== null) {
+      userStatusDTO = UserChallengeMapper.toDTO(userChallenge)
+    }
     const challengeDTO = ChallengeMapper.toDTO(challenge)
-    return challengeDTO
+    return {
+      challenge: challengeDTO,
+      userStatus: userStatusDTO
+    }
   }
 }

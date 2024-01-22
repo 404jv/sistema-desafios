@@ -1,7 +1,7 @@
 import { prisma } from '@/database/prisma'
 import { ChallengeStatus, type UserChallengeDTO, type SubmitChallengeDTO } from '@/dtos/challenge-dto'
 import { AppError } from '@/errors/AppError'
-import { SubmitChallengeMapper } from '@/mappers/user-challenge-mapper'
+import { UserChallengeMapper } from '@/mappers/user-challenge-mapper'
 
 export class SubmitChallengeService {
   async execute ({ challengeId, repoUrl, userId }: SubmitChallengeDTO): Promise<UserChallengeDTO> {
@@ -17,7 +17,7 @@ export class SubmitChallengeService {
         userId
       }
     })
-    const userChallengeDTO = SubmitChallengeMapper.toDTO(userChallenge)
+    const userChallengeDTO = UserChallengeMapper.toDTO(userChallenge)
     return userChallengeDTO
   }
 }

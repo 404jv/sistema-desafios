@@ -1,19 +1,14 @@
 import { authConfig } from '@/config/auth'
 import { prisma } from '@/database/prisma'
-import { type AuthenticationUserDTO, type UserDTO } from '@/dtos/user-dto'
+import { type AuthenticateResponseDTO, type AuthenticationUserDTO } from '@/dtos/user-dto'
 import { AppError } from '@/errors/AppError'
 import { UserMapper } from '@/mappers/user-mapper'
 
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-type AuthenticateResponse = {
-  token: string
-  user: UserDTO
-}
-
 export class AuthenticateService {
-  async execute ({ username, password }: AuthenticationUserDTO): Promise<AuthenticateResponse> {
+  async execute ({ username, password }: AuthenticationUserDTO): Promise<AuthenticateResponseDTO> {
     const user = await prisma.user.findFirst({ where: { username } })
     if (user === null) {
       throw new AppError('Username or password invalid', 401)

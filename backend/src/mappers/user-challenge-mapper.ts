@@ -1,7 +1,7 @@
 import { type UserChallengeDTO } from '@/dtos/challenge-dto'
 import { type UserChallenge } from '@prisma/client'
 
-export class SubmitChallengeMapper {
+export class UserChallengeMapper {
   static toDTO (userChallenge: UserChallenge): UserChallengeDTO {
     return {
       repoUrl: userChallenge.repoUrl,
