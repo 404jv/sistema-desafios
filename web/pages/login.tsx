@@ -73,7 +73,7 @@ export default function Login() {
             </span>
           </div>
           <button 
-            className="bg-blue text-white p-2 rounded-lg mt-8 w-40 text-lg hover:bg-blue-700 font-bold py-2 px-4 rainbow-hover"
+            className="bg-blue shadow-buttonBlue text-white p-2 rounded-lg mt-8 w-40 text-lg hover:bg-blue-700 hover:shadow-none font-bold py-2 px-4 rainbow-hover"
             type="submit">
             Enviar
           </button>

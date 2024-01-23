@@ -36,6 +36,9 @@ const config: Config = {
         inter: ['var(--font-inter)', ...fontFamily.sans],
         roboto: ['var(--font-roboto)', ...fontFamily.sans],
       },
+      boxShadow: {
+        'buttonBlue': '0px 0px 14px 1px rgba(0,133, 255,0.72)',
+      }
     },
   },
   plugins: [],
