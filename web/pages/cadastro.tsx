@@ -14,7 +14,7 @@ export default function Cadastro() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      const response = await fetch('http://:3333/api/v1/users/create', {
+      const response = await fetch(`${process.env.baseUrl}/users/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

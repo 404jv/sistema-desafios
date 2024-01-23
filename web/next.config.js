@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ['picsum.photos', 'images.unsplash.com'],
   },
+  env: {
+    baseUrl: 'https://animated-umbrella-grqw75xqpjp3p457-3333.app.github.dev/api/v1'
+  }
 }
 
 module.exports = nextConfig

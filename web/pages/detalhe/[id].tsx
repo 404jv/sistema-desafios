@@ -29,7 +29,7 @@ export default function Detalhe() {
     event.preventDefault();
     const userToken = localStorage.getItem('token@sistemadesafios')
     try {
-      const response = await fetch('http://localhost:3333/api/v1/challenges/submit', {
+      const response = await fetch(`${process.env.baseUrl}/challenges/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export default function Detalhe() {
     const accessToken = localStorage.getItem('token@sistemadesafios');
     const fetchChallenge = async () => {
       try {
-        const response = await fetch(`http://localhost:3333/api/v1/challenges/${challengeId}`, {
+        const response = await fetch(`${process.env.baseUrl}/challenges/${challengeId}`, {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
