@@ -7,6 +7,8 @@ interface ConfettiWrapperProps {
 
 export default function ConfettiWrapper({ numberOfPieces }: ConfettiWrapperProps) {
   const [pieces, setPieces] = useState<number>(numberOfPieces);
+  const width = window.innerWidth;
+  const height = document.documentElement.scrollHeight;
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -15,5 +17,9 @@ export default function ConfettiWrapper({ numberOfPieces }: ConfettiWrapperProps
     return () => clearTimeout(timeoutId);
   }, []);
 
-  return <Confetti numberOfPieces={pieces} />;
+  return (
+    <div>
+      <Confetti width={width} height={height} numberOfPieces={pieces} />
+    </div>
+  );
 };

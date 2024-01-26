@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Challenge } from "@/components/Card";
-import Confetti from "react-confetti";
 import ConfettiWrapper from "@/components/ConfettiWrapper";
 
 type UserStatus = {
@@ -125,7 +124,7 @@ export default function Detalhe() {
             ))}
           </div>
         </div>
-        {showConfetti && <ConfettiWrapper numberOfPieces={100} />}
+        {showConfetti && <ConfettiWrapper numberOfPieces={400} />}
 
         <div>
           <h2 className='text-purple-900 font-bold text-3xl text-center mb-4'>
