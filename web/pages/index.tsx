@@ -8,7 +8,9 @@ export default function Index() {
     const token = localStorage.getItem('token@sistemadesafios');
     if (!token) {
       router.push('/login');
+      return;
     }
+    router.push('/home');
   }, [router])
 
   return (
