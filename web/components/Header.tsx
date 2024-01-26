@@ -22,7 +22,7 @@ export default function Header() {
       />
       <div className="flex gap-2">
         <h1 className="text-purple-900 font-bold text-xl">
-          <Link href="/">Sistema Desafios</Link>
+          <Link href="/home">Sistema Desafios</Link>
         </h1>
         <button onClick={logout} className="text-red-500 font-bold">Sair</button>
       </div>

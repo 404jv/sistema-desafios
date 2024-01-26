@@ -96,7 +96,7 @@ export default function Detalhe() {
     <div>
       <Header />
       <div className="mt-8 ml-16">
-        <Link className="text-white text-lg underline" href='/' >{'<- Voltar'}</Link>
+        <Link className="text-white text-lg underline" href='/home' >{'<- Voltar'}</Link>
       </div>
       <main className="h-size flex flex-col justify-center items-center gap-16 mb-16">
         <Image
