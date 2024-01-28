@@ -2,10 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['picsum.photos', 'images.unsplash.com'],
+    domains: ['picsum.photos', 'images.unsplash.com', 'plus.unsplash.com'],
   },
   env: {
-    baseUrl: 'https://animated-umbrella-grqw75xqpjp3p457-3333.app.github.dev/api/v1'
+    baseUrl: 'http://localhost:3333/api/v1'
   }
 }
 
