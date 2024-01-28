@@ -15,7 +15,8 @@
     "test:only": "npm run test:watch -- --testPathPattern='get-challenge-controller.spec.ts'",
     "test:staged": "npm test -- --findRelatedTests",
     "test:coverage": "npm test -- --coverage",
-    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files"
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
+    "seed:admin": "ts-node-dev -r tsconfig-paths/register src/database/seed/admin.ts"
   },
   "keywords": [],
   "author": "",
