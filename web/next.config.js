@@ -5,7 +5,7 @@ const nextConfig = {
     domains: ['picsum.photos', 'images.unsplash.com', 'plus.unsplash.com'],
   },
   env: {
-    baseUrl: 'http://localhost:3333/api/v1'
+    baseUrl: 'https://sistemadesafio.jao.life/api/v1'
   }
 }
 
