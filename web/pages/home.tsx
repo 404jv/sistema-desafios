@@ -2,14 +2,10 @@ import Card, { Challenge } from "@/components/Card";
 import Header from "@/components/Header";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import loadChallenges from "./api/load-challenges";
 
-type Props = {
-  challenges: Challenge[]
-}
-
-export default function Home({ challenges }: Props) {
+export default function Home() {
   const [user, setUser] = useState<any>(null)
+  const [challenges, setChallenges] = useState<Challenge[]>()
   const router = useRouter()
 
   useEffect(() => {
@@ -18,7 +14,17 @@ export default function Home({ challenges }: Props) {
     const token = localStorage.getItem('token@sistemadesafios');
     if (!token) {
       router.push('/login');
-    }    
+    }
+    async function loadChallenges() {
+      try {
+        const response = await fetch(`${process.env.baseUrl}/challenges/list`);
+        const body = await response.json();
+        setChallenges(body);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    loadChallenges()
   }, [router])
 
   return (
@@ -56,7 +62,7 @@ export default function Home({ challenges }: Props) {
           </div>
         </div>
         <div className="flex pl-8 gap-4 flex-wrap">
-          {challenges.map(challenge => (
+          {challenges?.map(challenge => (
             <Card 
               key={challenge.id} 
               challenge={challenge}
@@ -66,13 +72,4 @@ export default function Home({ challenges }: Props) {
       </main>
     </div>
   )
-}
-
-export async function getStaticProps() {
-  const challenges = await loadChallenges();
-  return {
-    props: {
-      challenges
-    }
-  }
 }

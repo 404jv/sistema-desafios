@@ -5,7 +5,7 @@ const nextConfig = {
     domains: ['picsum.photos', 'images.unsplash.com', 'plus.unsplash.com'],
   },
   env: {
-    baseUrl: 'https://sistemadesafio.jao.life/api/v1'
+    baseUrl: 'https://animated-umbrella-grqw75xqpjp3p457-3333.app.github.dev/api/v1'
   }
 }
 
