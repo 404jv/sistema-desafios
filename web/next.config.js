@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['picsum.photos', 'images.unsplash.com', 'plus.unsplash.com', 'imagekit.io'],
+    domains: ['picsum.photos', 'images.unsplash.com', 'plus.unsplash.com', 'ik.imagekit.io'],
   },
   env: {
     baseUrl: 'https://sistemadesafio.jao.life/api/v1'
