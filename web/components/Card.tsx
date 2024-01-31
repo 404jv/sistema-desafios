@@ -34,9 +34,9 @@ export default function Card({ challenge }: Props) {
     <div className="bg-black-800 rounded-md min-w-64">
       <Image
         src={challenge.imageUrl}
-        className='rounded-t-md object-cover min-w-64 max-h-40'
+        className='rounded-t-md object-cover w-64 h-40'
         alt="Foto do projeto"
-        width={'190'}
+        width={190}
         height={190}
       />
       <h3 className="text-white font-bold text-center mt-2 text-xl">
