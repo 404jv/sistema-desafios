@@ -63,21 +63,10 @@ export default function Home() {
         </div>
         <div className="flex pl-8 gap-4 flex-wrap">
           {challenges?.map(challenge => (
-            <>
-              <Card 
-                key={challenge.id} 
-               challenge={challenge}
-              />
-              <Card 
-                key={challenge.id} 
-               challenge={challenge}
-              />
-              <Card 
-                key={challenge.id} 
-               challenge={challenge}
-              />
-            </>
-            
+            <Card 
+              key={challenge.id} 
+              challenge={challenge}
+            />
           ))}
         </div>
       </main>
