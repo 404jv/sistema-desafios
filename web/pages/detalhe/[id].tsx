@@ -120,7 +120,7 @@ export default function Detalhe() {
                 <div key={todo.id} className='flex gap-1 items-center mb-2'>
                   <input type="checkbox" id={todo.id} />
                   <label 
-                    className="max-w-2xl text-gray-300" 
+                    className="max-w-xl text-gray-300 break-all" 
                     style={{ wordSpacing: 'normal' }} 
                     htmlFor={todo.id}
                   >
