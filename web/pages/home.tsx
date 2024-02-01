@@ -61,7 +61,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex pl-8 gap-4 flex-wrap">
+        <div className="flex pl-8 gap-2 flex-wrap justify-center mr-1">
           {challenges?.map(challenge => (
             <Card 
               key={challenge.id} 
