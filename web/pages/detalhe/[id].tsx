@@ -115,11 +115,17 @@ export default function Detalhe() {
           <h2 className='text-purple-900 font-bold text-3xl text-center mb-4'>
             ✅Checklist
           </h2>
-          <div className="flex flex-col text-center align-center justify-center text-gray-300 text-lg">
+          <div className="flex flex-col text-justify align-center justify-center text-lg">
             {challenge.todos.map(todo => (
-                <div key={todo.id} className='flex gap-2 items-center'>
+                <div key={todo.id} className='flex gap-1 items-center mb-2'>
                   <input type="checkbox" id={todo.id} />
-                  <label htmlFor={todo.id}>{todo.title}</label>
+                  <label 
+                    className="max-w-2xl text-gray-300" 
+                    style={{ wordSpacing: 'normal' }} 
+                    htmlFor={todo.id}
+                  >
+                    {todo.title}
+                  </label>
                 </div>
             ))}
           </div>
@@ -143,7 +149,7 @@ export default function Detalhe() {
               onChange={(e) => setRepoUrl(e.target.value)}
             />
             <button 
-              className="bg-blue shadow-buttonBlue self-center text-white p-1 rounded-lg mt-2 w-36 text-lg hover:bg-blue-700 hover:shadow-none font-bold py-2 px-4 rainbow-hover disabled:bg-green disabled:hover:bg-none"
+              className="bg-blue shadow-buttonBlue self-center text-white p-1 rounded-lg mt-2 w-36 text-lg hover:bg-blue-700 hover:shadow-none font-bold py-2 px-4 rainbow-hover disabled:bg-green disabled:hover:bg-none disabled:shadow-none"
               type="submit"
               disabled={sended}
             >
