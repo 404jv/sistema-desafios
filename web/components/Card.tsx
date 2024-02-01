@@ -40,7 +40,11 @@ export default function Card({ challenge }: Props) {
         height={190}
       />
       <h3 className="text-white font-bold text-center mt-2 text-xl">
-        {challenge.title}
+        {
+          challenge.title.length > 16 
+            ? `${challenge.title.slice(0, 16)}...` 
+            : `${challenge.title}`
+        }
       </h3>
       <div className="flex flex-col ml-2">
         {challenge.tags.map(tag => (
