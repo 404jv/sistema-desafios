@@ -28,6 +28,7 @@ export default function Tag({ title }: Props) {
     Linha: '#bc0341',
     Lua: '#000080',
     Scratch: '#FFFF00',
+    Roblox: '#FFF',
   }
   const defaultColor = '#9CA3AF'
   const color = colors[title] ?? defaultColor
