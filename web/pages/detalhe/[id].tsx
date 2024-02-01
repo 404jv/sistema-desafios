@@ -106,7 +106,7 @@ export default function Detalhe() {
           height={460}
         />
         <div>
-          <h2 className='text-purple-900 font-bold text-3xl text-center mb-4'>🎯Github Profile</h2>
+          <h2 className='text-purple-900 font-bold text-3xl text-center mb-4'>🎯 {challenge.title}</h2>
           <p className='text-gray-300 text-lg text-justify max-w-xl'>
             {challenge.description}
           </p>
