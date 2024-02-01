@@ -11,26 +11,35 @@ type ColorCustom = {
 }
 
 type ColorMap = {
-  [key: string]: ColorCustom;
+  [key: string]: string;
 }
 
 export default function Tag({ title }: Props) {
   const colors: ColorMap = {
-    Python: { bgColor: 'bg-green', iconColor: 'rgb(29 186 84)', text: 'text-green' },
-    Minecraft: { bgColor: 'bg-red-500', iconColor: 'rgb(239 68 68)', text: 'text-red-500' },
-    'Fácil': { bgColor: 'bg-blue', iconColor: 'rgb(0 133 255)', text: 'text-blue' }
+    Python: '#1DBA54',
+    Minecraft: '#61371F',
+    'Fácil': '#0085FF',
+    'Difícil': '#EF4444',
+    'Médio': '#FFA500 ',
+    yellow: '#FFFF00',
+    Kodu: '#36c7f2',
+    Blocos: '#248144',
+    Bloco: '#248144',
+    Linha: '#bc0341',
+    Lua: '#000080',
+    Scratch: '#FFFF00',
   }
-  const defaultColor: ColorCustom = {
-    bgColor: 'bg-gray-400',
-    text: 'text-gray-400',
-    iconColor: 'rgb(156 163 175)',
-  }
+  const defaultColor = '#9CA3AF'
   const color = colors[title] ?? defaultColor
 
   return (
-    <div className={`font-bold flex gap-2 ${color.text}`}>
-      <Circle className={`${color.bgColor} rounded-full mt-1`} width={14} height={14} color={color.iconColor} />
-      <span>{title}</span>
+    <div className="font-bold flex gap-1 items-center ml-1">
+      <div
+        className="rounded-full h-3 w-3"
+        style={{ backgroundColor: color }}
+      ></div>
+      <span style={{ color: color }}>{title}</span>
     </div>
   )
 }
+ 
