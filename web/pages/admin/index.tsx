@@ -31,10 +31,10 @@ export default function CreateChallenge() {
                 <td className="py-2 px-4 text-red-600">Não</td>
                 <td className="py-2 px-4">0</td>
                 <td className="py-2 px-4">08/01/2004</td>
-                <div className="flex flex-col text-sm py-2 px-4 underline">
+                <td className="flex flex-col text-sm py-2 px-4 underline">
                   <Link href={'/'}>Editar</Link>
                   <Link href={'/'}>Resetar senha</Link>
-                </div>
+                </td>
               </tr>
 
               <tr className="min-h-10 bg-black-800 mb-4">
@@ -43,10 +43,10 @@ export default function CreateChallenge() {
                 <td className="py-2 px-4 text-red-600">Não</td>
                 <td className="py-2 px-4">0</td>
                 <td className="py-2 px-4">08/01/2004</td>
-                <div className="flex flex-col text-sm py-2 px-4 underline">
+                <td className="flex flex-col text-sm py-2 px-4 underline">
                   <Link href={'/'}>Editar</Link>
                   <Link href={'/'}>Resetar senha</Link>
-                </div>
+                </td>
               </tr>
 
             </tbody>
