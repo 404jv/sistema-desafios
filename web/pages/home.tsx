@@ -1,5 +1,6 @@
 import Card, { Challenge } from "@/components/Card";
 import Header from "@/components/Header";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -32,7 +33,16 @@ export default function Home() {
       <Header />
 
       <main className="mb-32">
-        <h1 className="font-bold text-2xl text-white mt-16 mb-8 ml-8">👋 Olá, {user?.name}</h1>
+        <div className="mt-16 mb-8 ml-8">
+            <h1 className="font-bold text-2xl text-white mb-2">👋 Olá, {user?.name}</h1>
+            { 
+              user?.isAdmin && 
+              <>⚙ <Link target="_blank" className="text-white underline" href='/admin'>
+                Dashboard
+              </Link></>
+            }
+        </div>
+
         <div className='flex flex-row items-center h-size justify-between pl-8 pr-8 mb-4'>
           <h2 className='text-purple-900 font-bold text-3xl'>Desafios</h2>
           <div className='flex gap-16'>

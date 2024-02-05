@@ -16,3 +16,9 @@
     background-position: -200% 0;
   }
 }
+
+@layer components {
+  .my-table-spacing {
+    border-spacing: theme("spacing.3");
+  }
+}
