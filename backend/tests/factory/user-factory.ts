@@ -1,6 +1,6 @@
 import { authConfig } from '@/config/auth'
 import { prisma } from '@/database/prisma'
-import { type AuthenticateResponseDTO } from '@/dtos/user-dto'
+import { type UserDTO, type AuthenticateResponseDTO } from '@/dtos/user-dto'
 import { UserMapper } from '@/mappers/user-mapper'
 
 import { hashSync } from 'bcrypt'
@@ -41,4 +41,30 @@ export async function CreateUserAndAuthenticate (): Promise<AuthenticateResponse
     token,
     user: userDto
   }
+}
+
+export async function createManyUsers (): Promise<UserDTO[]> {
+  await prisma.user.createMany({
+    data: [
+      {
+        name: 'admin_test',
+        password: hashSync('password', 10),
+        username: 'admin',
+        isAdmin: true
+      },
+      {
+        name: 'user_test',
+        password: hashSync('password', 10),
+        username: 'user_test',
+        isAdmin: false
+      }
+    ]
+  })
+  const users = await prisma.user.findMany({
+    orderBy: [{ name: 'asc' }]
+  })
+  const usersDto = users.map(user => {
+    return UserMapper.toDTO(user)
+  })
+  return usersDto
 }

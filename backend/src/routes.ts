@@ -7,6 +7,7 @@ import { ensureIsAdmin } from './middlewares/ensure-admin'
 import { ListChallengesController } from './controllers/list-challenges-controller'
 import { GetChallengeController } from './controllers/get-challenge-controller'
 import { SubmitChallengeController } from './controllers/submit-challenge-controller'
+import { ListUsersController } from './controllers/list-users-controller'
 
 const routes = Router()
 
@@ -14,11 +15,13 @@ const createUserController = new CreateUserController()
 const authenticateController = new AuthenticateController()
 const createChallengeController = new CreateChallengeController()
 const listChallengesController = new ListChallengesController()
+const listUsersController = new ListUsersController()
 const getChallengesController = new GetChallengeController()
 const submitChallengeController = new SubmitChallengeController()
 
 routes.post('/users/create', createUserController.handle)
 routes.post('/users/login', authenticateController.handle)
+routes.get('/users/list', ensureAuthenticated, ensureIsAdmin, listUsersController.handle)
 
 routes.post('/challenges/create', ensureAuthenticated, ensureIsAdmin, createChallengeController.handle)
 routes.get('/challenges/list', listChallengesController.handle)
