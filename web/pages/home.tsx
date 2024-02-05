@@ -18,7 +18,7 @@ export default function Home() {
     }
     async function loadChallenges() {
       try {
-        const response = await fetch(`${process.env.baseUrl}/challenges/list`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/challenges/list`);
         const body = await response.json();
         setChallenges(body);
       } catch (error) {

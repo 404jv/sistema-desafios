@@ -24,7 +24,7 @@ export default function CreateChallenge() {
     })
     const accessToken = localStorage.getItem('token@sistemadesafios');
     try {
-      const response = await fetch(`${process.env.baseUrl}/challenges/create`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/challenges/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

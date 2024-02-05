@@ -28,7 +28,7 @@ export default function Detalhe() {
     event.preventDefault();
     const userToken = localStorage.getItem('token@sistemadesafios')
     try {
-      const response = await fetch(`${process.env.baseUrl}/challenges/submit`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/challenges/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export default function Detalhe() {
     const accessToken = localStorage.getItem('token@sistemadesafios');
     const fetchChallenge = async () => {
       try {
-        const response = await fetch(`${process.env.baseUrl}/challenges/${challengeId}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/challenges/${challengeId}`, {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }

@@ -12,7 +12,7 @@ export default function Login() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      const response = await fetch(`${process.env.baseUrl}/users/login`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
