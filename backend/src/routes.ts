@@ -8,6 +8,7 @@ import { ListChallengesController } from './controllers/list-challenges-controll
 import { GetChallengeController } from './controllers/get-challenge-controller'
 import { SubmitChallengeController } from './controllers/submit-challenge-controller'
 import { ListUsersController } from './controllers/list-users-controller'
+import { UpdateUserController } from './controllers/update-user-controller'
 
 const routes = Router()
 
@@ -18,10 +19,12 @@ const listChallengesController = new ListChallengesController()
 const listUsersController = new ListUsersController()
 const getChallengesController = new GetChallengeController()
 const submitChallengeController = new SubmitChallengeController()
+const updateUserController = new UpdateUserController()
 
 routes.post('/users/create', createUserController.handle)
 routes.post('/users/login', authenticateController.handle)
 routes.get('/users/list', ensureAuthenticated, ensureIsAdmin, listUsersController.handle)
+routes.put('/users/update', ensureAuthenticated, ensureIsAdmin, updateUserController.handle)
 
 routes.post('/challenges/create', ensureAuthenticated, ensureIsAdmin, createChallengeController.handle)
 routes.get('/challenges/list', listChallengesController.handle)

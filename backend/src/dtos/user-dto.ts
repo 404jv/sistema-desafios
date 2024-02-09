@@ -12,6 +12,12 @@ export type CreateUserDTO = {
   confirmPassword: string
 }
 
+export type UpdateUserDTO = {
+  id: string
+  username: string
+  name: string
+}
+
 export type AuthenticationUserDTO = {
   username: string
   password: string
