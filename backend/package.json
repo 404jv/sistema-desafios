@@ -12,7 +12,7 @@
     "migrate:dev": "npx prisma migrate dev",
     "test": "npm run services:up && jest --verbose",
     "test:watch": "npm test -- --watch --detectOpenHandles",
-    "test:only": "npm run test:watch -- --testPathPattern='reset-user-password-controller.spec.ts'",
+    "test:only": "npm run test:watch -- --testPathPattern='update-user-controller.spec.ts'",
     "test:staged": "npm test -- --findRelatedTests",
     "test:coverage": "npm test -- --coverage",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",

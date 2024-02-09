@@ -3,6 +3,7 @@ import supertest from 'supertest'
 import { CreateAdminUserAndAuthenticate, CreateUserAndAuthenticate } from '../factory/user-factory'
 import { type UserDTO } from '@/dtos/user-dto'
 import { prisma } from '@/database/prisma'
+import { hashSync } from 'bcrypt'
 
 describe('/api/v1/users/update', () => {
   let oldUser: UserDTO
@@ -36,6 +37,30 @@ describe('/api/v1/users/update', () => {
     expect(response.statusCode).toBe(200)
     expect(response.body.id).toBe(oldUser.id)
     expect(response.body).toEqual(newUser)
+  })
+
+  it('should return 400 when username already exists', async () => {
+    const existentUser = await prisma.user.create({
+      data: {
+        name: 'any_user',
+        password: hashSync('12345', 10),
+        username: 'existent_username'
+      }
+    })
+    const invalidUserUpdate = {
+      id: newUser.id,
+      username: existentUser.username,
+      isAdmin: newUser.isAdmin,
+      name: newUser.name
+    }
+
+    const response = await supertest(app)
+      .put('/api/v1/users/update')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send(invalidUserUpdate)
+
+    expect(response.statusCode).toBe(400)
+    expect(response.body.message).toBe('Username already exists')
   })
 
   it('should return 404 when update an user that does not exist', async () => {
