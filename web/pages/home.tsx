@@ -37,7 +37,7 @@ export default function Home() {
             <h1 className="font-bold text-2xl text-white mb-2">👋 Olá, {user?.name}</h1>
             { 
               user?.isAdmin && 
-              <>⚙ <Link target="_blank" className="text-white underline" href='/admin'>
+              <>⚙ <Link className="text-white underline" href='/admin'>
                 Dashboard
               </Link></>
             }
