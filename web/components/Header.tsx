@@ -6,8 +6,8 @@ export default function Header() {
   const router = useRouter()
 
   function logout() {
-    localStorage.removeItem('user@sistemadesafios');
-    localStorage.removeItem('token@sistemadesafios');
+    sessionStorage.removeItem('user@sistemadesafios');
+    sessionStorage.removeItem('token@sistemadesafios');
     router.push('/');
     return;
   }

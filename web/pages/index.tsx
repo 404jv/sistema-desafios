@@ -5,7 +5,7 @@ export default function Index() {
   const router = useRouter()
 
   useEffect(() => {
-    const token = localStorage.getItem('token@sistemadesafios');
+    const token = sessionStorage.getItem('token@sistemadesafios');
     if (!token) {
       router.push('/login');
       return;

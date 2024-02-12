@@ -26,8 +26,8 @@ export default function Login() {
       }
       const user = body.user;
       const token = body.token
-      localStorage.setItem('user@sistemadesafios', JSON.stringify(user))
-      localStorage.setItem('token@sistemadesafios', token)
+      sessionStorage.setItem('user@sistemadesafios', JSON.stringify(user))
+      sessionStorage.setItem('token@sistemadesafios', token)
       router.push('/home');
     } catch (error) {
       console.error(error);

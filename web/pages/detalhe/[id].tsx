@@ -26,7 +26,7 @@ export default function Detalhe() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const userToken = localStorage.getItem('token@sistemadesafios')
+    const userToken = sessionStorage.getItem('token@sistemadesafios')
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/challenges/submit`, {
         method: 'POST',
@@ -40,8 +40,8 @@ export default function Detalhe() {
         }),
       });
       if (response.status === 401) {
-        localStorage.removeItem('user@sistemadesafios')
-        localStorage.removeItem('token@sistemadesafios')
+        sessionStorage.removeItem('user@sistemadesafios')
+        sessionStorage.removeItem('token@sistemadesafios')
         router.push('/login')
         return;
       }
@@ -57,7 +57,7 @@ export default function Detalhe() {
   }
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('token@sistemadesafios');
+    const accessToken = sessionStorage.getItem('token@sistemadesafios');
     const fetchChallenge = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/challenges/${challengeId}`, {

@@ -10,9 +10,9 @@ export default function Home() {
   const router = useRouter()
 
   useEffect(() => {
-    const userJson = localStorage.getItem('user@sistemadesafios') as string
+    const userJson = sessionStorage.getItem('user@sistemadesafios') as string
     setUser(JSON.parse(userJson))
-    const token = localStorage.getItem('token@sistemadesafios');
+    const token = sessionStorage.getItem('token@sistemadesafios');
     if (!token) {
       router.push('/login');
     }

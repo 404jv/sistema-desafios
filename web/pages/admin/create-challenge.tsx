@@ -22,7 +22,7 @@ export default function CreateChallenge() {
       todos: checklistItems,
       tags: tagList,
     })
-    const accessToken = localStorage.getItem('token@sistemadesafios');
+    const accessToken = sessionStorage.getItem('token@sistemadesafios');
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/challenges/create`, {
         method: 'POST',
@@ -56,8 +56,8 @@ export default function CreateChallenge() {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem('token@sistemadesafios');
-    const userString = localStorage.getItem('user@sistemadesafios');
+    const token = sessionStorage.getItem('token@sistemadesafios');
+    const userString = sessionStorage.getItem('user@sistemadesafios');
     if (!token || !userString) {
       router.push('/login');
       return;
