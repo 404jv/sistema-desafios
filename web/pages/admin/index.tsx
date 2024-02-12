@@ -1,7 +1,57 @@
 import Header from "@/components/Header";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+export type User = {
+  id: string;
+  name: string;
+  username: string;
+  password: string;
+  isAdmin: boolean;
+}
 
 export default function CreateChallenge() {
+  const [users, setUsers] = useState<User[]>()
+
+  async function handleResetPassword(userId: string) {
+    const token = sessionStorage.getItem('token@sistemadesafios');
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/users/reset-password/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (response.status === 204) {
+        alert('Senha alterada com sucesso!')
+        return;
+      }
+      const errorResponse = await response.json();
+      alert(errorResponse.message);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    async function getUserList(): Promise<void> {
+      const token = sessionStorage.getItem('token@sistemadesafios');
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/users/list`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const body = await response.json();
+        setUsers(body)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getUserList();
+  }, [])
+
   return (
     <div className="">
       <Header />
@@ -25,30 +75,25 @@ export default function CreateChallenge() {
             </thead>
 
             <tbody className="text-gray-500">
-              <tr className="min-h-10 bg-black-800 mb-4">
-                <td className="py-2 px-4">404jv</td>
-                <td className="py-2 px-4">João Victor Ramalho Alves</td>
-                <td className="py-2 px-4 text-red-600">Não</td>
-                <td className="py-2 px-4">0</td>
-                <td className="py-2 px-4">08/01/2004</td>
-                <td className="flex flex-col text-sm py-2 px-4 underline">
-                  <Link href={'/'}>Editar</Link>
-                  <Link href={'/'}>Resetar senha</Link>
-                </td>
-              </tr>
-
-              <tr className="min-h-10 bg-black-800 mb-4">
-                <td className="py-2 px-4">404jv</td>
-                <td className="py-2 px-4">João Victor Ramalho Alves</td>
-                <td className="py-2 px-4 text-red-600">Não</td>
-                <td className="py-2 px-4">0</td>
-                <td className="py-2 px-4">08/01/2004</td>
-                <td className="flex flex-col text-sm py-2 px-4 underline">
-                  <Link href={'/'}>Editar</Link>
-                  <Link href={'/'}>Resetar senha</Link>
-                </td>
-              </tr>
-
+              {
+                users?.map((user) => {
+                  return (
+                    <tr key={user.id} className="min-h-10 bg-black-800 mb-4">
+                      <td className="py-2 px-4">{user.username}</td>
+                      <td className="py-2 px-4">{user.name}</td>
+                      <td className={`py-2 px-4 ${user.isAdmin ? 'text-green' : 'text-red-500' }`}>
+                        { user.isAdmin ? 'Sim' : 'Não' }
+                      </td>
+                      <td className="py-2 px-4">0</td>
+                      <td className="py-2 px-4">DD/MM/AAAA</td>
+                      <td className="flex flex-col text-sm py-2 px-4 underline">
+                        <Link href={'/'}>Editar</Link>
+                        <button onClick={() => handleResetPassword(user.id)}>Resetar senha</button>
+                      </td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </table>
         </div>
