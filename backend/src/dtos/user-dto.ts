@@ -3,6 +3,7 @@ export type UserDTO = {
   username: string
   name: string
   isAdmin: boolean
+  totalChallenges?: number
 }
 
 export type CreateUserDTO = {

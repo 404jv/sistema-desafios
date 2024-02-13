@@ -28,6 +28,7 @@ describe('/api/v1/users/list', () => {
     expect(response.statusCode).toEqual(200)
     expect(response.body).toEqual(users)
     expect(response.body[0]).not.toHaveProperty('password')
+    expect(response.body[0]).toHaveProperty('totalChallenges')
   })
 
   it('should return 401 when an anonymous user try to list users', async () => {

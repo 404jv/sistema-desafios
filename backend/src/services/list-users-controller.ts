@@ -5,10 +5,15 @@ import { UserMapper } from '@/mappers/user-mapper'
 export class ListUsersService {
   async execute (): Promise<UserDTO[]> {
     const users = await prisma.user.findMany({
-      orderBy: [{ name: 'asc' }]
+      orderBy: [{ name: 'asc' }],
+      include: {
+        userChallenge: true
+      }
     })
     const usersDto = users.map(user => {
-      return UserMapper.toDTO(user)
+      const userDto = UserMapper.toDTO(user)
+      userDto.totalChallenges = user.userChallenge.length
+      return userDto
     })
     return usersDto
   }
