@@ -17,7 +17,7 @@
     "test:coverage": "npm test -- --coverage",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "seed:admin": "ts-node-dev -r tsconfig-paths/register src/database/seed/admin.ts",
-    "seed:removeAdmin": "ts-node-dev -r tsconfig-paths/register src/database/seed/admin.ts"
+    "seed:removeAdmin": "ts-node-dev -r tsconfig-paths/register src/database/seed/removeAdmin.ts"
   },
   "keywords": [],
   "author": "",
