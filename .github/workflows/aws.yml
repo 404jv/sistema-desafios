@@ -47,4 +47,4 @@ jobs:
             source ~/.nvm/nvm.sh 
             npm i
             npx prisma migrate dev
-            pm2 restart inkBack
+            pm2 restart sistemadesafios
