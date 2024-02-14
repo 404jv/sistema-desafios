@@ -5,7 +5,7 @@ async function removeAdmin (): Promise<void> {
     where: {
       isAdmin: true
     }
-  })
+  }).catch(e => { console.log(e) })
 }
 
 removeAdmin()
