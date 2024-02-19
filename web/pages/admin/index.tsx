@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export type User = {
@@ -13,6 +14,11 @@ export type User = {
 
 export default function CreateChallenge() {
   const [users, setUsers] = useState<User[]>()
+  const route = useRouter()
+
+  function navigateToUpdateUser() {
+
+  }
 
   async function handleResetPassword(userId: string) {
     const token = sessionStorage.getItem('token@sistemadesafios');
@@ -88,7 +94,11 @@ export default function CreateChallenge() {
                       <td className="py-2 px-4">{user?.totalChallenges}</td>
                       <td className="py-2 px-4">DD/MM/AAAA</td>
                       <td className="flex flex-col text-sm py-2 px-4 underline">
-                        <Link href={'/'}>Editar</Link>
+                        <Link 
+                          href={`/admin/aluno/update?userData=${encodeURIComponent(JSON.stringify(user))}`}
+                        >
+                          Editar
+                        </Link>
                         <button onClick={() => handleResetPassword(user?.id)}>Resetar senha</button>
                       </td>
                     </tr>
