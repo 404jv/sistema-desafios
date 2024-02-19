@@ -17,6 +17,7 @@ jobs:
       - name: Setup Nodejs
         uses: actions/setup-node@v4
         with:
+          sparse-checkout: .
           node-version: 20
       
       - name: Install dependencies
