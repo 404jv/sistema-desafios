@@ -10,7 +10,7 @@ export class UpdateUserService {
       throw new AppError('User not found', 404)
     }
     const usernameExists = await prisma.user.findFirst({ where: { username } })
-    if (usernameExists !== null) {
+    if (usernameExists !== null && usernameExists.id !== user.id) {
       throw new AppError('Username already exists', 400)
     }
     const newUser = await prisma.user.update({
