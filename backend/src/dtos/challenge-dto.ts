@@ -17,6 +17,14 @@ export type ChallengeDTO = {
   todos: TodoDTO[]
 }
 
+export type CreateChallengeDTO = {
+  title: string
+  description: string
+  imageUrl: string
+  todos: string[]
+  tags: string[]
+}
+
 export enum ChallengeStatus {
   PENDING = 'PENDING',
   REVISED = 'REVISED',

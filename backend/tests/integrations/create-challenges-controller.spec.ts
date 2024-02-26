@@ -1,5 +1,5 @@
 import { app } from '@/app'
-import { type CreateChallengeDTO } from '@/controllers/create-challenge-controller'
+import { type CreateChallengeDTO } from '@/dtos/challenge-dto'
 import { CreateAdminUserAndAuthenticate, CreateUserAndAuthenticate } from '@/tests/factory/user-factory'
 
 import supertest from 'supertest'
