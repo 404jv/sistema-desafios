@@ -30,10 +30,15 @@ type Props = {
 }
 
 export default function Card({ challenge }: Props) {
+  function isValidUrl(url: string): boolean {
+    const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
+    return urlPattern.test(url)
+  }
+
   return (
     <div className="bg-black-800 rounded-md min-w-64">
       <Image
-        src={challenge.imageUrl}
+        src={isValidUrl(challenge.imageUrl) ? challenge.imageUrl : '/emoji.png'}
         className='rounded-t-md object-cover w-64 h-40'
         alt="Foto do projeto"
         width={190}
