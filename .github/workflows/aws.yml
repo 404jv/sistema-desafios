@@ -19,7 +19,7 @@ jobs:
           node-version: 'lts/Hydrogen'
       
       - name: Install dependencies
-        run: npm i
+        run: cd app/sistema-desafios/backend && npm i
       
       - name: Build
         run: npm run build
