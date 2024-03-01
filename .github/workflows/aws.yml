@@ -17,10 +17,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/Hydrogen'
-  
-      - name: Build
-        run: npm run build
-        
+
       - uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
