@@ -10,6 +10,7 @@ import { SubmitChallengeController } from './controllers/submit-challenge-contro
 import { ListUsersController } from './controllers/list-users-controller'
 import { UpdateUserController } from './controllers/update-user-controller'
 import { ResetUserPasswordController } from './controllers/reset-user-password-controller'
+import { DeleteUserController } from './controllers/delete-user-controller'
 
 const routes = Router()
 
@@ -21,12 +22,14 @@ const listUsersController = new ListUsersController()
 const getChallengesController = new GetChallengeController()
 const submitChallengeController = new SubmitChallengeController()
 const updateUserController = new UpdateUserController()
+const deleteUserController = new DeleteUserController()
 const resetUserPasswordController = new ResetUserPasswordController()
 
 routes.post('/users/create', createUserController.handle)
 routes.post('/users/login', authenticateController.handle)
 routes.get('/users/list', ensureAuthenticated, ensureIsAdmin, listUsersController.handle)
 routes.put('/users/update', ensureAuthenticated, ensureIsAdmin, updateUserController.handle)
+routes.delete('/users/delete/:id', ensureAuthenticated, ensureIsAdmin, deleteUserController.handle)
 routes.put('/users/reset-password/:id',
   ensureAuthenticated,
   ensureIsAdmin,

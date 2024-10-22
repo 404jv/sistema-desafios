@@ -43,6 +43,18 @@ export async function CreateUserAndAuthenticate (): Promise<AuthenticateResponse
   }
 }
 
+export async function createUser (): Promise<UserDTO> {
+  const user = await prisma.user.create({
+    data: {
+      name: 'user_test',
+      password: hashSync('password', 10),
+      username: 'user_test',
+      isAdmin: false
+    }
+  })
+  return UserMapper.toDTO(user)
+}
+
 export async function createManyUsers (): Promise<UserDTO[]> {
   await prisma.user.createMany({
     data: [
